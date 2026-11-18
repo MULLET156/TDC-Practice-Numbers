@@ -1,0 +1,3 @@
+# Vendored core/ must stay byte-for-byte (checked against CHECKSUMS), on Windows too.
+vendor/opendental-core/** -text
+*.cmd text eol=crlf
