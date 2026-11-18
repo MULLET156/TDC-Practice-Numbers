@@ -1,0 +1,116 @@
+/* Practice Numbers: number cards and charts. The shared kit (/shared/tdc.css)
+   has no classes for these, so they live here. Only --tdc-* colours and the
+   shared fonts are used, so light and dark mode follow the suite (DESIGN.md). */
+
+.pn-num { font-family: var(--tdc-font-mono); font-variant-numeric: tabular-nums; }
+.pn-note { margin: 8px 0 0; font-size: 13px; color: var(--tdc-muted); }
+.pn-r { text-align: right !important; }
+
+/* ---------- Date range picker ---------- */
+.pn-range { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0 0 16px; }
+.pn-range .tdc-seg { flex-wrap: wrap; }
+.pn-custom { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; }
+.pn-custom label { display: flex; flex-direction: column; gap: 2px; font-size: 12px; font-weight: 600; color: var(--tdc-muted); }
+.pn-custom input { min-height: 40px; padding: 0 10px; font: inherit; font-family: var(--tdc-font-mono); font-size: 15px; color: var(--tdc-ink); background: var(--tdc-sunk); border: 1px solid var(--tdc-line); border-radius: 8px; }
+.pn-custom input:focus-visible { outline: 2px solid var(--tdc-accent); outline-offset: 1px; }
+.pn-custom .tdc-btn { min-height: 40px; }
+html.pn-js .pn-range:not(.pn-open) .pn-custom { display: none; }
+.pn-cmp { flex-basis: 100%; margin: 0; font-size: 14px; color: var(--tdc-muted); }
+.pn-cmp strong { color: var(--tdc-ink); font-weight: 600; font-size: 13px; }
+
+/* ---------- Number cards ---------- */
+.pn-kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin: 0 0 18px; }
+.pn-kpis-2 { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.pn-kpi { position: relative; display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 16px 18px 14px; background: var(--tdc-surface); border: 1px solid var(--tdc-line); border-radius: var(--tdc-radius); box-shadow: var(--tdc-shadow); overflow: hidden; }
+.pn-kpi[data-big]::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: var(--tdc-accent); }
+.pn-kpi-label { display: flex; align-items: center; gap: 8px; margin: 0; font-family: var(--tdc-font); font-size: 14px; font-weight: 700; color: var(--tdc-muted); }
+.pn-kpi-label .tdc-icon { width: 18px; height: 18px; color: var(--tdc-accent-ink); }
+.pn-kpi-value { margin: 0; font-family: var(--tdc-font-mono); font-variant-numeric: tabular-nums; font-size: 28px; font-weight: 700; line-height: 1.15; color: var(--tdc-ink); }
+.pn-kpi[data-big] .pn-kpi-value { font-size: 32px; }
+.pn-kpi-value.pn-na { font-family: var(--tdc-font); font-size: 18px; font-weight: 700; color: var(--tdc-muted); }
+.pn-kpi[data-empty] { border-style: dashed; box-shadow: none; }
+.pn-kpi-line { margin: 0; font-size: 13px; line-height: 1.35; }
+.pn-kpi-sub { margin: 2px 0 0; font-size: 13px; color: var(--tdc-muted); }
+.pn-kpi .tdc-meter { width: 100%; margin: 2px 0; }
+
+.pn-delta { font-family: var(--tdc-font-mono); font-weight: 700; white-space: nowrap; }
+.pn-delta[data-tone="good"] { color: var(--tdc-ok); }
+.pn-delta[data-tone="bad"] { color: var(--tdc-alert); }
+.pn-delta[data-tone="flat"], .pn-delta[data-tone="none"] { color: var(--tdc-muted); }
+.pn-vs { color: var(--tdc-muted); }
+
+.pn-missing { margin: 4px 0 2px; padding-left: 18px; font-size: 14px; }
+
+/* ---------- Chart blocks ---------- */
+.pn-figure { margin: 0 0 18px; padding: 14px 18px 16px; background: var(--tdc-surface); border: 1px solid var(--tdc-line); border-radius: var(--tdc-radius); box-shadow: var(--tdc-shadow); }
+.pn-figcap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; margin: 0 0 10px; }
+.pn-figtitle { font-family: var(--tdc-font-head); font-stretch: 80%; font-weight: 800; font-size: 20px; color: var(--tdc-ink); }
+.pn-figure .tdc-empty { margin: 0; }
+html:not(.pn-js) .pn-view { display: none; }
+html.pn-js .pn-figure[data-view="chart"] .pn-tablebox,
+html.pn-js .pn-figure[data-view="table"] .pn-chartbox { display: none; }
+.pn-tablebox { overflow-x: auto; }
+.pn-narrow { display: none; }
+@media (max-width: 640px) {
+  .pn-wide { display: none; }
+  .pn-narrow { display: block; }
+  .pn-figure { padding: 12px 12px 14px; }
+  .pn-kpis { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pn-kpis-2 { grid-template-columns: 1fr; }
+  .pn-kpi { padding: 12px 12px 10px; }
+  .pn-kpi-value, .pn-kpi[data-big] .pn-kpi-value { font-size: 21px; }
+  .pn-kpi[data-big] { grid-column: span 2; }
+  .pn-kpi[data-big] .pn-kpi-value { font-size: 26px; }
+  .pn-kpi-line, .pn-kpi-sub { font-size: 12.5px; }
+  .pn-vs .pn-num { display: block; }
+}
+
+.pn-svg { display: block; width: 100%; max-width: 960px; height: auto; overflow: visible; }
+.pn-svg text { font-family: var(--tdc-font); }
+.pn-grid { stroke: var(--tdc-line); stroke-width: 1; }
+.pn-base { stroke: var(--tdc-muted); stroke-width: 1.5; }
+.pn-axis { font-family: var(--tdc-font-mono) !important; font-size: 12px; fill: var(--tdc-muted); }
+.pn-xlab { font-size: 13px; fill: var(--tdc-muted); }
+.pn-xlab-strong { font-weight: 700; fill: var(--tdc-ink); font-size: 14px; }
+.pn-val { font-family: var(--tdc-font-mono) !important; font-size: 13px; font-weight: 700; fill: var(--tdc-ink); }
+.pn-val.pn-turn { font-size: 12px; }
+.pn-blab { font-size: 14px; font-weight: 700; fill: var(--tdc-ink); }
+.pn-bsub { font-size: 12px; fill: var(--tdc-muted); }
+.pn-bval { font-family: var(--tdc-font-mono) !important; font-size: 13px; font-weight: 700; fill: var(--tdc-ink); }
+.pn-track { fill: var(--tdc-sunk); }
+.pn-hl { stroke: var(--tdc-ink); stroke-width: 2; }
+
+/* Series colours (each series also has a name in the legend, never colour alone). */
+.pn-bar.pn-s1, .pn-key.pn-s1 { fill: var(--tdc-accent); background: var(--tdc-accent); }
+.pn-bar.pn-s2, .pn-key.pn-s2 { fill: var(--tdc-info); background: var(--tdc-info); }
+.pn-bar.pn-s3, .pn-key.pn-s3 { fill: var(--tdc-ok); background: var(--tdc-ok); }
+.pn-val.pn-s1, .pn-bval.pn-s1 { fill: var(--tdc-accent-ink); }
+.pn-val.pn-s2, .pn-bval.pn-s2 { fill: var(--tdc-info); }
+.pn-val.pn-s3, .pn-bval.pn-s3 { fill: var(--tdc-ok); }
+/* Aging: green → blue → amber → red as balances get older. */
+.pn-bar.pn-a0 { fill: var(--tdc-ok); }
+.pn-bar.pn-a1 { fill: var(--tdc-info); }
+.pn-bar.pn-a2 { fill: var(--tdc-warn); }
+.pn-bar.pn-a3 { fill: var(--tdc-alert); }
+
+.pn-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 8px 0 0; font-size: 13px; font-weight: 600; color: var(--tdc-ink); }
+.pn-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.pn-key { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+
+/* ---------- Tables ---------- */
+.pn-table th[scope="row"] { font-size: 14px; text-transform: none; letter-spacing: 0; color: var(--tdc-ink); font-weight: 600; }
+.pn-table tfoot th, .pn-table tfoot td { font-weight: 800; border-top: 2px solid var(--tdc-line); border-bottom: 0; }
+.pn-table td.pn-num { white-space: nowrap; }
+
+/* ---------- Patient lists (behind a tap) ---------- */
+.pn-listbtns .tdc-btn { display: inline-flex; align-items: center; gap: 8px; }
+.pn-listbtns .tdc-btn .tdc-icon { width: 18px; height: 18px; }
+.pn-listbtns .tdc-btn[aria-pressed="true"] { background: var(--tdc-accent); border-color: var(--tdc-accent); color: var(--tdc-on-solid); }
+.pn-list:not(:empty) { margin-top: 14px; }
+.pn-list .pn-figure { overflow-x: auto; }
+
+@media print {
+  .pn-range .tdc-seg, .pn-custom, .pn-view, .pn-listbtns { display: none !important; }
+  .pn-figure, .pn-kpi { box-shadow: none; break-inside: avoid; }
+  html.pn-js .pn-figure .pn-tablebox { display: block !important; }
+}

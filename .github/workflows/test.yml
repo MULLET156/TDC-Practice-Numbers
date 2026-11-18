@@ -1,0 +1,32 @@
+name: Tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [20, 22]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm test
+  design:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No fonts from outside sites (DESIGN.md §3)
+        run: |
+          if grep -rInE "fonts\.(googleapis|gstatic)\.com|use\.typekit|fonts\.bunny|@import url\(['\"]?https?:" public lib server.js; then
+            echo "::error::Fonts come from the Dashboard's /shared/fonts/, never from an outside site."
+            exit 1
+          fi
+      - name: No dependencies (PLAN.md rule 4)
+        run: |
+          node -e "const p=require('./package.json'); if (p.dependencies||p.devDependencies) { console.error('::error::No npm dependencies allowed'); process.exit(1) }"
