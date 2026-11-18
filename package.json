@@ -1,0 +1,13 @@
+{
+  "name": "tdc-practice-numbers",
+  "version": "0.1.0",
+  "description": "TDC Office module: production, collections, A/R and trends from Open Dental (owner and admin only).",
+  "private": true,
+  "main": "server.js",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "license": "UNLICENSED"
+}
